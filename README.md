@@ -1,54 +1,57 @@
-# React + TypeScript + Vite
+# 📌 Проектная структура и применение SOLID
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📁 Структура проекта
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+📦 src/
+ ├── 📂 assets/       # Медиафайлы (изображения, иконки и т. д.)
+ ├── 📂 components/   # UI-компоненты (кнопки, формы, списки и др.)
+ ├── 📂 hooks/        # Пользовательские хуки React
+ ├── 📂 interface/    # Типы и интерфейсы TypeScript
+ ├── 📂 pages/        # Страницы приложения (маршруты)
+ ├── 📂 services/     # Логика взаимодействия с API и внешними сервисами
+ ├── 📂 store/        # Управление глобальным состоянием (Redux, Zustand и др.)
+ ├── 📂 styles/       # Глобальные и модульные стили (SCSS, CSS)
+ ├── 📂 tests/        # Тесты (юнит, интеграционные, e2e)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎯 Применение принципов SOLID
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### ✅ 1. Single Responsibility Principle (SRP) — *Принцип единственной ответственности*
+Каждый компонент и хук выполняет только одну задачу, что делает код легко читаемым и поддерживаемым:
+- **`Posts`** — отображает список постов.
+- **`PostDetail`** — показывает детали поста и комментарии.
+- **`useAddPost`** — управляет логикой добавления поста.
+- **`useFetchData`** — отвечает за загрузку данных (состояние загрузки, ошибки).
+- **`AddPostModal`** — модальное окно для добавления поста.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 🚀 2. Open/Closed Principle (OCP) — *Принцип открытости/закрытости*
+Код расширяем без изменения существующих модулей:
+- **`useFetchData`** поддерживает загрузку разных данных (посты, комментарии и т. д.) с разными параметрами.
+- **`AddPostModal`** можно легко модифицировать (валидация, UI), не изменяя основной код компонента.
+
+### 🔄 3. Liskov Substitution Principle (LSP) — *Принцип подстановки Барбары Лисков*
+Компоненты можно заменять аналогичными без изменения логики:
+- Все компоненты используют **единые интерфейсы**, что делает возможным их замену без поломки кода.
+
+### 🛠 4. Interface Segregation Principle (ISP) — *Принцип разделения интерфейсов*
+Каждый хук и компонент имеет узкую специализацию:
+- **`useAddPost`** работает только с добавлением постов.
+- **`useFetchData`** отвечает за загрузку данных и их кеширование.
+- **`useEntityActions`** управляет изменением данных (создание, обновление, удаление).
+
+### 🔗 5. Dependency Inversion Principle (DIP) — *Принцип инверсии зависимостей*
+Компоненты зависят от **абстракций**, а не от конкретных реализаций:
+- **Хуки (useFetchData, useAddPost, useEntityActions)** абстрагируют логику работы с API.
+- **Компоненты и страницы** используют хуки вместо прямого взаимодействия с сервисами.
+
+---
+
+## 🚀 Запуск проекта
+
+```bash
+npm install && npm start
 ```
+
+
+
