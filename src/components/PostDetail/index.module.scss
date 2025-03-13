@@ -1,0 +1,129 @@
+@use "styles/variables" as *;
+
+.container {
+  padding: 20px;
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: $post-title;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+
+  .commentsList {
+    height: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .commentItem {
+    background-color: $primary-text-color;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: $box-shadow-post;
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: $box-shadow-post-hover;
+    }
+
+    .commentActions {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .commentEmail {
+    font-size: 16px;
+    font-weight: bold;
+    color: $post-title-color;
+    margin-bottom: 10px;
+  }
+
+  .commentBody {
+    font-size: 14px;
+    color: $post-body-color;
+  }
+
+  .pagination {
+    margin-bottom: 30px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modalLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: $post-title;
+}
+
+.modalInput,
+.modalTextarea {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid $modal-input-border-color;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: $modal-input-focus-border-color;
+    outline: none;
+  }
+}
+
+.modalTextarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.errorAlert {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.infoAlert {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  color: $post-body-color;
+}

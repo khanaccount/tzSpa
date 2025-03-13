@@ -1,0 +1,17 @@
+@use "styles/variables" as *;
+
+.footer {
+  background-color: $primary-bg-color;
+  color: $primary-text-color;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+
+  .footerCopy {
+    font-size: 12px;
+  }
+}
