@@ -2,15 +2,29 @@ import { useParams } from "react-router";
 import { Button, Spin, Alert, Modal, Input } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useEntityActions, useFetchData } from "hooks/index";
-import { updateComment, deleteComment, fetchCommentsByPostId } from "store/slices/commentSlice";
+import {
+  updateComment,
+  deleteComment,
+  fetchCommentsByPostId,
+  clearComments,
+} from "store/slices/commentSlice";
 import { selectComments } from "store/selectors";
 import { Comment } from "interface/index";
+import { useEffect } from "react";
+import { useAppDispatch } from "hooks/redux";
 
 import s from "./index.module.scss";
 
 export const PostDetail: React.FC = () => {
   const { id } = useParams();
   const postId = Number(id);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearComments());
+    };
+  }, [dispatch]);
 
   const {
     data: comments,
